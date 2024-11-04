@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -22,7 +24,10 @@ public class Medicamento {
 	@NotNull
 	private int idFornecedor;
 	private String dataValidade;
-
+	@ManyToOne
+	@JoinColumn(name = "fornecedor_id")
+	private Fornecedor fornecedor;
+	
 	public String getNome() {
 		return nome;
 	}
@@ -54,12 +59,12 @@ public class Medicamento {
 	public void setBula(String bula) {
 		this.bula = bula;
 	}
-
-	public int getIdFornecedor() {
-		return idFornecedor;
+	
+	public Fornecedor getFornecedor() {
+		return fornecedor;
 	}
 
-	public void setIdFornecedor(int idFornecedor) {
-		this.idFornecedor = idFornecedor;
+	public void setFornecedor(Fornecedor fornecedor) {
+		this.fornecedor = fornecedor;
 	}
 }

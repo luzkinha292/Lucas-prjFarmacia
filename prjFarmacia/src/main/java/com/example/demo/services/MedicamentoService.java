@@ -38,10 +38,12 @@ public class MedicamentoService {
 		Optional<Medicamento> medicamentoExistente = medicamentoRepository.findById(id);
 		if (medicamentoExistente.isPresent()) {
 			Medicamento medicamento = medicamentoExistente.get();
-			medicamento.setNome(medicamentoAtualizado.getNome());
-			medicamento.setIdFornecedor(medicamentoAtualizado.getIdFornecedor());
+			medicamento.setNome(medicamentoAtualizado.getNome());	
 			medicamento.setBula(medicamentoAtualizado.getBula());
 			medicamento.setDataValidade(medicamentoAtualizado.getDataValidade());
+			if(medicamentoAtualizado.getFornecedor() != null) {
+				medicamento.setFornecedor(medicamentoAtualizado.getFornecedor());
+			}
 			return medicamentoRepository.save(medicamento);
 		} else {
 			return null;
