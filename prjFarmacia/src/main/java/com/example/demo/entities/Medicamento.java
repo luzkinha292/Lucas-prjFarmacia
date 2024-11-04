@@ -22,7 +22,6 @@ public class Medicamento {
 	private String nome;
 	private String bula;
 	@NotNull
-	private int idFornecedor;
 	private String dataValidade;
 	@ManyToOne
 	@JoinColumn(name = "fornecedor_id")

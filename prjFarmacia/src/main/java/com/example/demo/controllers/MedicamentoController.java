@@ -28,8 +28,13 @@ public class MedicamentoController {
 	}
 
 	@PostMapping("/criar")
-	public Medicamento criarUsuario(@RequestBody Medicamento medicamento) {
-		return medicamentoService.salvarMedicamento(medicamento);
+	public ResponseEntity<Medicamento> criarMedicamento(@RequestBody Medicamento medicamento) {
+		Medicamento medicamentoSalvo = medicamentoService.salvarMedicamento(medicamento);
+		if(medicamentoSalvo != null) {
+			return ResponseEntity.ok(medicamentoSalvo);
+		} else {
+			return ResponseEntity.badRequest().build();
+		}
 	}
 
 	@GetMapping

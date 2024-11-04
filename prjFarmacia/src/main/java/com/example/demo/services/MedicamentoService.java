@@ -6,20 +6,36 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.entities.Fornecedor;
 import com.example.demo.entities.Medicamento;
+import com.example.demo.repositories.FornecedorRepository;
 import com.example.demo.repositories.MedicamentoRepository;
 
 @Service
 public class MedicamentoService {
 	private final MedicamentoRepository medicamentoRepository;
 
+	private final FornecedorRepository fornecedorRepository;
+	
 	@Autowired
-	public MedicamentoService(MedicamentoRepository medicamentoRepository) {
+	public MedicamentoService(MedicamentoRepository medicamentoRepository, FornecedorRepository fornecedorRepository) {
 		this.medicamentoRepository = medicamentoRepository;
+		this.fornecedorRepository = fornecedorRepository;
 	}
 
 	public Medicamento salvarMedicamento(Medicamento medicamento) {
-		return medicamentoRepository.save(medicamento);
+		if(medicamento.getFornecedor() != null && medicamento.getFornecedor().getId() != null) {
+			Optional<Fornecedor> fornecedor = fornecedorRepository.findById(medicamento.getFornecedor().getId());
+			if(fornecedor.isPresent()) {
+				medicamento.setFornecedor(fornecedor.get());
+				return medicamentoRepository.save(medicamento);
+			} else {
+				throw new RuntimeException("Fornecedor não encontrado");
+			}
+		}	
+		else {
+			throw new RuntimeException("Id do fornecedor é obrigatório");
+		}
 	}
 
 	public Medicamento buscarMedicamentoPorId(Long id) {
