@@ -21,6 +21,7 @@ public class Drogaria {
 	@NotNull
 	@Size(min = 3, message = "Insira no mínimo 3 caracteres")
 	private String nome;
+	private int idFornecedor;
 	
 	public String getNome() {
 		return nome;
@@ -44,5 +45,13 @@ public class Drogaria {
 
 	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
+	}
+	
+	public int getIdFornecedor() {
+		return idFornecedor;
+	}
+
+	public void setIdFornecedor(int idFornecedor) {
+		this.idFornecedor = idFornecedor;
 	}
 }

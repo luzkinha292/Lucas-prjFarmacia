@@ -40,6 +40,7 @@ public class DrogariaService {
 			Drogaria drogaria = drogariaExistente.get();
 			drogaria.setNome(drogariaAtualizada.getNome());
 			drogaria.setCnpj(drogariaAtualizada.getCnpj());
+			drogaria.setIdFornecedor(drogariaAtualizada.getIdFornecedor());
 			return drogariaRepository.save(drogaria);
 		} else {
 			return null;
