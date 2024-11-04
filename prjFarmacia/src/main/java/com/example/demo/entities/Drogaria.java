@@ -10,19 +10,18 @@ import jakarta.validation.constraints.Size;
 
 @Entity
 @Table
-public class Medicamento {
+public class Drogaria {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	@NotNull
-	@Size(min = 3, message = "Minímo de 3 Caracteres")
-	private String nome;
-	private String bula;
+	@Size(min = 14, message = "Insira 14 caracteres")
+	private String cnpj;
 	@NotNull
-	private int idFornecedor;
-	private String dataValidade;
-
+	@Size(min = 3, message = "Insira no mínimo 3 caracteres")
+	private String nome;
+	
 	public String getNome() {
 		return nome;
 	}
@@ -38,28 +37,12 @@ public class Medicamento {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	public String getDataValidade() {
-		return dataValidade;
+	
+	public String getCnpj() {
+		return cnpj;
 	}
 
-	public void setDataValidade(String dataValidade) {
-		this.dataValidade = dataValidade;
-	}
-
-	public String getBula() {
-		return bula;
-	}
-
-	public void setBula(String bula) {
-		this.bula = bula;
-	}
-
-	public int getIdFornecedor() {
-		return idFornecedor;
-	}
-
-	public void setIdFornecedor(int idFornecedor) {
-		this.idFornecedor = idFornecedor;
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
 	}
 }
